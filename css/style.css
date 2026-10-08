@@ -1,0 +1,801 @@
+
+/* ---------- Base ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #020609;
+  color: #eef7f8;
+  font-family: Arial, sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Estrutura principal ---------- */
+.dex {
+  width: min(1400px, 96vw);
+  min-height: 760px;
+  margin: 35px auto;
+  display: grid;
+  grid-template-columns: 1fr 42px 1fr;
+  filter: drop-shadow(0 30px 35px #000);
+}
+
+.left,
+.right {
+  position: relative;
+  background: linear-gradient(145deg, #f20a3b, #df002f 45%, #a80020);
+  border: 3px solid #58000f;
+}
+
+.left {
+  border-radius: 22px 5px 5px 22px;
+  padding: 28px 28px 30px 34px;
+}
+
+/* Coluna direita em flex: a tela e os botões ficam um abaixo do outro */
+.right {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px 22px 22px 5px;
+  padding: 28px 34px 30px 28px;
+}
+
+/* ---------- Dobradiça ---------- */
+.hinge {
+  position: relative;
+  z-index: 3;
+  margin: 0 -7px;
+  border: 3px solid #4b000c;
+  border-radius: 18px;
+  background: linear-gradient(90deg, #6a0014, #ec2348, #760016);
+}
+
+.hinge i {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 58px;
+  border-radius: 50%;
+  border: 2px solid #54000e;
+  background: #b90027;
+}
+
+.hinge i:nth-child(1) { top: 7%; }
+.hinge i:nth-child(2) { top: 44%; }
+.hinge i:nth-child(3) { top: 81%; }
+
+/* ---------- Lente e LEDs ---------- */
+.lens {
+  position: absolute;
+  top: 15px;
+  left: 28px;
+  width: 65px;
+  height: 65px;
+  border: 3px solid #d8e7eb;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 25%,
+    #72e2ff 0 10%,
+    #1395cb 18% 40%,
+    #06486c 48% 70%,
+    #07131a 73%
+  );
+  box-shadow: 0 0 0 3px #15242b;
+}
+
+.leds {
+  position: absolute;
+  top: 27px;
+  left: 110px;
+  display: flex;
+  gap: 9px;
+}
+
+.leds i {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 1px solid #650014;
+}
+
+.leds i:nth-child(1) { background: #ef3047; }
+.leds i:nth-child(2) { background: #e8cf25; }
+.leds i:nth-child(3) { background: #43bd68; }
+
+/* ---------- Painéis ---------- */
+.panel {
+  background: #07131a;
+  border: 3px solid #202d32;
+  box-shadow: inset 0 0 25px #000;
+}
+
+/* ==========================================================================
+   Lado esquerdo — lista
+   ========================================================================== */
+.leftpanel {
+  margin-top: 65px;
+  padding: 12px;
+  background: #d9ddde;
+  border-color: #697276;
+  border-radius: 8px;
+}
+
+.leftpanel header {
+  display: flex;
+  align-items: end;
+  margin-bottom: 8px;
+  color: #111a1d;
+}
+
+.leftpanel small {
+  display: block;
+  font-size: 8px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #657176;
+}
+
+.leftpanel h2 {
+  margin: 2px 0 0;
+  font-size: 23px;
+}
+
+.leftpanel header button {
+  margin-left: auto;
+  width: 31px;
+  height: 31px;
+  border: 1px solid #5d686c;
+  background: #bcc4c5;
+}
+
+/* Busca */
+.search {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  background: #07151c;
+  border: 2px solid #34454c;
+}
+
+.search span {
+  padding: 0 7px;
+  color: #65a1b2;
+}
+
+.search input {
+  flex: 1;
+  height: 100%;
+  border: 0;
+  outline: 0;
+  background: none;
+  color: white;
+  font-size: 11px;
+}
+
+.search button {
+  border: 0;
+  background: none;
+  color: #79919b;
+}
+
+/* Filtros por tipo */
+.filters {
+  display: flex;
+  gap: 4px;
+  padding: 7px 0;
+  overflow: auto;
+}
+
+.filters button {
+  padding: 5px 7px;
+  border: 1px solid #36515b;
+  background: #11242c;
+  color: #aac0c8;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.filters .active {
+  background: #079fd4;
+  color: #fff;
+}
+
+/* Lista de Pokémon */
+.list {
+  height: 410px;
+  overflow: auto;
+  background: #06141b;
+  border: 3px solid #1c2b31;
+}
+
+.row {
+  width: 100%;
+  height: 54px;
+  padding: 3px 10px;
+  display: grid;
+  grid-template-columns: 48px 1fr 10px;
+  align-items: center;
+  border: 0;
+  border-bottom: 1px solid #18303a;
+  background: transparent;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.row:hover,
+.row.active {
+  background: #0b2a35;
+  box-shadow: inset 4px 0 #42d8ff;
+}
+
+.row img {
+  width: 40px;
+  height: 40px;
+}
+
+.row small {
+  display: block;
+  color: #62808c;
+  font-size: 8px;
+}
+
+.row b {
+  font-size: 12px;
+}
+
+.row i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #687984;
+}
+
+.empty {
+  padding: 30px;
+  text-align: center;
+  color: #76919b;
+  font-size: 11px;
+}
+
+/* Controles inferiores esquerdos */
+.leftcontrols {
+  position: absolute;
+  left: 35px;
+  right: 25px;
+  bottom: 18px;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.black {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: #061014;
+  border: 2px solid #3b000a;
+}
+
+.green {
+  width: 78px;
+  height: 44px;
+  background: #43b35c;
+  border: 2px solid #620014;
+  border-radius: 4px;
+}
+
+.yellow {
+  width: 45px;
+  height: 27px;
+  background: #e4c622;
+  border: 2px solid #620014;
+}
+
+.dpad {
+  position: relative;
+  width: 70px;
+  height: 55px;
+  border: 0;
+  background: transparent;
+}
+
+.dpad::before,
+.dpad::after {
+  content: "";
+  position: absolute;
+  background: #061114;
+  border: 2px solid #0b1519;
+  border-radius: 5px;
+}
+
+.dpad::before {
+  width: 20px;
+  height: 54px;
+  left: 25px;
+}
+
+.dpad::after {
+  width: 53px;
+  height: 20px;
+  left: 9px;
+  top: 17px;
+}
+
+.speaker {
+  margin-left: auto;
+  width: 44px;
+  height: 20px;
+  background: repeating-linear-gradient(0deg, #354047 0 2px, transparent 2px 5px);
+}
+
+/* ==========================================================================
+   Lado direito — detalhes
+   ========================================================================== */
+.rightpanel {
+  margin-top: 65px;
+  padding: 9px;
+  background: #d4d9da;
+  border-color: #697276;
+  border-radius: 8px;
+}
+
+.screen {
+  display: block;
+  height: 610px;
+  overflow-y: auto;
+  background: #06131a;
+  border: 3px solid #1b292f;
+  scroll-behavior: smooth;
+}
+
+.screen::-webkit-scrollbar {
+  width: 7px;
+}
+
+.screen::-webkit-scrollbar-thumb {
+  background: #078fbe;
+  border-radius: 5px;
+}
+
+.screen::-webkit-scrollbar-track {
+  background: #061016;
+}
+
+/* Cabeçalho fixo da tela */
+.screenhead {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 10px;
+  background: #06131a;
+  border-bottom: 1px solid #1d4655;
+  color: #58ddff;
+  font-size: 9px;
+}
+
+.profile {
+  display: block;
+  min-height: 0;
+}
+
+/* Arte do Pokémon */
+.art {
+  position: relative;
+  height: 300px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #041018;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(#18b9ed12 1px, transparent 1px),
+    linear-gradient(90deg, #18b9ed12 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.ring {
+  position: absolute;
+  aspect-ratio: 1;
+  border: 1px solid #18b9ed35;
+  border-radius: 50%;
+}
+
+.r1 { width: 220px; }
+.r2 { width: 150px; }
+
+.scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #18b9ed;
+  box-shadow: 0 0 15px #18b9ed;
+  animation: scan 2.5s infinite;
+}
+
+.art img {
+  position: relative;
+  z-index: 2;
+  width: min(270px, 72%);
+  height: 270px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 10px #000);
+}
+
+/* Informações principais */
+.info {
+  padding: 17px;
+  background: #07171e;
+  border-top: 1px solid #1d4655;
+}
+
+.info p {
+  min-height: 42px;
+  font-size: 10px;
+  line-height: 1.45;
+  color: #8da6af;
+}
+
+.nameline {
+  display: flex;
+  align-items: center;
+}
+
+.nameline h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.nameline button {
+  margin-left: auto;
+  width: 34px;
+  height: 29px;
+  background: #10242c;
+  border: 1px solid #38525c;
+  color: #9fb9c2;
+}
+
+.nameline button.on {
+  color: #ff3152;
+}
+
+/* Tipos */
+.types {
+  display: flex;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.type {
+  padding: 4px 8px;
+  background: #6e858d;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.type.fire     { background: #e35a3c; }
+.type.water    { background: #438ed6; }
+.type.grass    { background: #4da85b; }
+.type.electric { background: #cba91d; }
+.type.poison   { background: #9852a7; }
+.type.flying   { background: #768bd0; }
+.type.ice      { background: #52b9c5; }
+.type.psychic  { background: #dc5b85; }
+.type.dragon   { background: #6654bc; }
+
+/* Cartões (altura, peso, etc.) */
+.quick {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 18px;
+}
+
+.quick div,
+.cards div {
+  padding: 7px;
+  background: #091d25;
+  border: 1px solid #193640;
+}
+
+.quick small,
+.cards small {
+  display: block;
+  color: #5e8290;
+  font-size: 7px;
+}
+
+.quick b,
+.cards b {
+  font-size: 10px;
+}
+
+/* Abas */
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.tabs button {
+  padding: 9px 3px;
+  border: 0;
+  border-right: 1px solid #1e4655;
+  background: #07131a;
+  color: #67828c;
+  font-size: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background: #079dce;
+  color: white;
+}
+
+/* Conteúdo das abas */
+.content {
+  flex: 1;
+  padding: 9px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.stats {
+  display: grid;
+  gap: 6px;
+}
+
+.stats > div {
+  display: grid;
+  grid-template-columns: 80px 1fr 30px;
+  align-items: center;
+  gap: 6px;
+  font-size: 8px;
+}
+
+.stats i {
+  height: 7px;
+  background: #13272f;
+}
+
+.stats em {
+  display: block;
+  height: 100%;
+  background: #18b9ed;
+}
+
+/* Rodapé (anterior / próximo) */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px;
+  border-top: 1px solid #1d4655;
+}
+
+footer button {
+  padding: 6px 9px;
+  background: #0b1b22;
+  border: 1px solid #31505b;
+  color: #e4f0f2;
+  font-size: 8px;
+  cursor: pointer;
+}
+
+/* ---------- Botões decorativos (abaixo da tela, sem sobreposição) ---------- */
+.hardware {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding: 0 4px;
+}
+
+.hardware-keys {
+  display: flex;
+  gap: 12px;
+}
+
+.hardware-keys i {
+  display: block;
+  width: 75px;
+  height: 27px;
+  background: #00544b;
+  border: 2px solid #610014;
+  border-radius: 3px;
+}
+
+.roundyellow {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  border: 2px solid #8c7100;
+  background: #e4c722;
+}
+
+/* ==========================================================================
+   Aviso (toast)
+   ========================================================================== */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  z-index: 20;
+  transform: translateX(-50%);
+  padding: 9px 14px;
+  background: #06151c;
+  border: 2px solid #18b9ed;
+  font-size: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+#toast.show {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Tela de inicialização
+   ========================================================================== */
+#boot {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  background: #020608;
+}
+
+.bootbox {
+  width: min(520px, 90vw);
+  padding: 40px;
+  background: linear-gradient(145deg, #f20a3b, #a90021);
+  border: 4px solid #57000e;
+  border-radius: 18px;
+  box-shadow: 0 25px 80px #000;
+  text-align: center;
+}
+
+.bootlens {
+  margin: auto;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid white;
+  background: #138fc4;
+  box-shadow: inset 0 0 20px #002c46;
+}
+
+.bootbox h1 {
+  margin: 12px 0 0;
+  font-size: 42px;
+  letter-spacing: 5px;
+}
+
+.bootbox p {
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.bar {
+  height: 10px;
+  margin-top: 25px;
+  background: #670014;
+}
+
+.bar i {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: #6fe5ff;
+  box-shadow: 0 0 12px #6fe5ff;
+  transition: 0.15s;
+}
+
+.bootbox > b {
+  display: block;
+  margin-top: 4px;
+  text-align: right;
+  font-size: 10px;
+}
+
+.bootbox pre {
+  height: 52px;
+  text-align: left;
+  font: 9px monospace;
+}
+
+.hide {
+  animation: fade 0.4s forwards;
+}
+
+/* ---------- Animações ---------- */
+@keyframes fade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    top: 0;
+    opacity: 0.2;
+  }
+  50% {
+    top: 100%;
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (max-width: 900px) {
+  .dex {
+    display: block;
+    margin: 10px auto;
+  }
+
+  .hinge,
+  .hardware {
+    display: none;
+  }
+
+  .left,
+  .right {
+    margin-bottom: 12px;
+    border-radius: 16px;
+  }
+
+  .art {
+    height: 270px;
+  }
+
+  .screen {
+    height: 700px;
+    min-height: 700px;
+  }
+}
+
+@media (max-width: 600px) {
+  .left {
+    padding: 18px 12px 95px;
+  }
+
+  .right {
+    padding: 18px 12px 30px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .list {
+    height: 330px;
+  }
+}

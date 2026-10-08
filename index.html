@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pokédex Kanto</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- Tela de inicialização -->
+    <div id="boot">
+      <div class="bootbox">
+        <div class="bootlens"></div>
+        <h1>POKÉDEX</h1>
+        <p>KANTO DATABASE · GENERATION I</p>
+        <div id="bootstatus">INICIALIZANDO...</div>
+        <div class="bar"><i id="barfill"></i></div>
+        <b id="percent">0%</b>
+        <pre id="bootlog"></pre>
+      </div>
+    </div>
+
+    <!-- Aplicação -->
+    <main id="app" class="hidden">
+      <section class="dex">
+        <!-- Lado esquerdo: lista de Pokémon -->
+        <aside class="left">
+          <div class="lens"></div>
+          <div class="leds"><i></i><i></i><i></i></div>
+
+          <div class="panel leftpanel">
+            <header>
+              <div>
+                <small>DATABASE</small>
+                <h2>Pokémon</h2>
+              </div>
+              <button id="random" title="Pokémon aleatório">⤨</button>
+            </header>
+
+            <div class="search">
+              <span>⌕</span>
+              <input id="search" placeholder="Nome ou número..." />
+              <button id="clear">×</button>
+            </div>
+
+            <div id="filters" class="filters"></div>
+            <div id="list" class="list"></div>
+          </div>
+
+          <div class="leftcontrols">
+            <button class="black"></button>
+            <button class="green"></button>
+            <button class="yellow"></button>
+            <button class="dpad"></button>
+            <div class="speaker"></div>
+          </div>
+        </aside>
+
+        <!-- Dobradiça -->
+        <div class="hinge"><i></i><i></i><i></i></div>
+
+        <!-- Lado direito: detalhes do Pokémon -->
+        <section class="right">
+          <div class="panel rightpanel">
+            <div class="screen">
+              <div class="screenhead">
+                <b id="num">#001</b>
+                <span id="message">SELECIONE UM POKÉMON</span>
+              </div>
+
+              <div class="profile">
+                <div class="art">
+                  <div class="grid"></div>
+                  <div class="ring r1"></div>
+                  <div class="ring r2"></div>
+                  <div class="scan"></div>
+                  <img id="artimg" alt="" />
+                </div>
+
+                <div class="info">
+                  <div class="nameline">
+                    <h1 id="name">BULBASAUR</h1>
+                    <button id="fav">♡</button>
+                  </div>
+
+                  <div id="types" class="types"></div>
+                  <p id="flavor">Escolha um Pokémon na tela da esquerda.</p>
+
+                  <div class="quick">
+                    <div><small>ALTURA</small><b id="height">—</b></div>
+                    <div><small>PESO</small><b id="weight">—</b></div>
+                    <div><small>ESPÉCIE</small><b id="species">—</b></div>
+                    <div><small>POWER</small><b id="power">—</b></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tabs">
+                <button class="active" data-tab="info">INFO</button>
+                <button data-tab="abilities">HABILIDADES</button>
+                <button data-tab="stats">STATUS</button>
+                <button data-tab="moves">MOVIMENTOS</button>
+              </div>
+
+              <div id="content" class="content"></div>
+
+              <footer>
+                <button id="prev">◀ ANTERIOR</button>
+                <b><span id="index">001</span> / 151</b>
+                <button id="next">PRÓXIMO ▶</button>
+              </footer>
+            </div>
+          </div>
+
+          <!-- Botões decorativos (fora da tela, sem sobreposição) -->
+          <div class="hardware">
+            <div class="hardware-keys"><i></i><i></i></div>
+            <button class="roundyellow" aria-label="Botão amarelo"></button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast"></div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
